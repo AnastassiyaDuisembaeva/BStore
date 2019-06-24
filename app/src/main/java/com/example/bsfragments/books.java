@@ -39,7 +39,7 @@ public class books extends Fragment  implements IBookClickedInterface {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setInitialData();
+        //setInitialData();
         return inflater.inflate(R.layout.fragment_books, null);
     }
 
@@ -72,7 +72,7 @@ public class books extends Fragment  implements IBookClickedInterface {
                    if (parsedBook != null) {
                         books.add(parsedBook);
                     }
-                }
+                }setInitialData();
                 Log.d("Data", books.toString());
             }
 
@@ -93,7 +93,7 @@ public class books extends Fragment  implements IBookClickedInterface {
 
     public void setInitialData(){
         for(Item itemBook : books ){
-            items.add(itemBook);
+            items.add(new Item (itemBook.getName(),itemBook.getAuthor(),itemBook.getbookGanre(),itemBook.getPrice(),itemBook.getImageBook()));
         }
     }
 }
