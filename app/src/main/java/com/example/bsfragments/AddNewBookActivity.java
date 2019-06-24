@@ -54,6 +54,7 @@ public class AddNewBookActivity extends AppCompatActivity implements View.OnClic
             myRef.child("books").child(idAdd).setValue(book);
 
             Toast.makeText(AddNewBookActivity.this, "Книга добавлена успешна", Toast.LENGTH_SHORT).show();
+            AddNewBookActivity.this.finish();
         }
         else{
             Toast.makeText(AddNewBookActivity.this, "Поля не заполненны, книга не может быть добавлена", Toast.LENGTH_SHORT).show();

@@ -67,8 +67,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
                     Toast.makeText(LoginActivity.this, "Aвторизация успешна", Toast.LENGTH_SHORT).show();
+                    LoginActivity.this.finish();
                 }else
-                    Toast.makeText(LoginActivity.this, "Aвторизация провалена", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Aвторизация провалена, попробуйте еще раз", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -79,10 +80,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful())
                 {
-                    Toast.makeText(LoginActivity.this, "Регистрация успешна", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Регистрация успешна, нажмите кнопку - авторизация", Toast.LENGTH_SHORT).show();
                 }
                 else
-                    Toast.makeText(LoginActivity.this, "Регистрация провалена", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Регистрация провалена, попробуйте еще раз", Toast.LENGTH_SHORT).show();
             }
         });
     }
