@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_authentication"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddNewBookActivity">
+
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:id="@+id/idAdd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="145dp"
+        android:hint="ID"
+        android:textSize="20sp"/>
+    <EditText
+        android:id="@+id/nameAdd"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/idAdd"
+        android:hint="Название"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/authorAdd"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/nameAdd"
+        android:hint="Автор"
+        android:textSize="20sp" />
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:id="@+id/bookGanreAdd"
+        android:layout_centerHorizontal="true"
+        android:hint="Жанр"
+        android:textSize="20sp"
+        android:layout_below="@+id/authorAdd"
+        />
+    <EditText
+        android:id="@+id/priceAdd"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/bookGanreAdd"
+        android:hint="Цена"
+        android:textSize="20sp"
+        />
+    <EditText
+        android:id="@+id/imageBookAdd"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/priceAdd"
+        android:hint="ССылка изображения"
+        android:textSize="20sp"
+        />
+    <Button
+        android:id="@+id/add_new_book"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Добавить"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/imageBookAdd"/>
+</RelativeLayout>

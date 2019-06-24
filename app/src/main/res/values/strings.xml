@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">BookStore</string>
+    <string name="title_news">Новости</string>
+    <string name="title_books">Книги</string>
+    <string name="title_accaunt">Кабинет</string>
+    <string name="title_activity_login">Вход</string>
+    <string name="prompt_email">Почта</string>
+    <string name="prompt_password">Пароль</string>
+    <string name="action_sign_in">Войдите или зарегестрируйтесь</string>
+    <string name="action_sign_in_short">Вход</string>
+    <string name="welcome">"Добро пожаловать!"</string>
+    <string name="invalid_username">Не правильный логин</string>
+    <string name="invalid_password">Пароль должен быть больше 5 знаков</string>
+    <string name="login_failed">"Вход провален"</string>
+    <string name="search_hint">Поиск</string>
+</resources>
