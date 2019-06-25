@@ -86,9 +86,13 @@ public class books extends Fragment  implements IBookClickedInterface {
     }
     @Override
     public void onViewClicked(View view, int position) {
-        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        Intent intent = new Intent(getActivity(), DetailsBook.class);
         Bundle data = new Bundle();
         data.putString("item_book_image", items.get(position).getImageBook());
+        data.putString("item_book_name", items.get(position).getName());
+        data.putString("item_book_author", items.get(position).getAuthor());
+        data.putString("item_book_price", items.get(position).getPrice());
+        data.putString("item_book_ganre", items.get(position).getbookGanre());
         getActivity().startActivity(intent);
     }
 
