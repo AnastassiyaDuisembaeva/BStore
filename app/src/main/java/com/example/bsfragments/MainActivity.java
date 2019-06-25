@@ -9,14 +9,18 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener  {
     private Toolbar toolbar;
-
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    Fragment fragment = null;
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Fragment fragment = null;
-
         switch (item.getItemId()) {
             case R.id.navigation_news:
                 fragment = new news();
@@ -27,7 +31,23 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 break;
 
             case R.id.navigation_accaunt:
-                fragment = new accaunt();
+                mAuth = FirebaseAuth.getInstance();
+
+                mAuthListener = new FirebaseAuth.AuthStateListener() {
+                    @Override
+                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
+                        if (user != null) {
+                            fragment = new accaunt();
+
+                        } else {
+                            Toast.makeText(MainActivity.this, "Вам необходимо пройти авторизацию", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        }
+
+                    }
+                };
                 break;
 
         }
@@ -44,13 +64,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //loading the default fragment
+
         loadFragment(new books());
 
-        //getting bottom navigation view and attaching the listener
         BottomNavigationView navigation = findViewById(R.id.nav_view);
         navigation.setOnNavigationItemSelectedListener(this);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -75,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
     private boolean loadFragment(Fragment fragment) {
-        //switching fragment
+
         if (fragment != null) {
             getSupportFragmentManager()
                     .beginTransaction()

@@ -28,7 +28,7 @@ public class books extends Fragment  implements IBookClickedInterface {
     ArrayList<Item> books = new ArrayList<>();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
-
+    RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.booksList);
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -46,9 +46,7 @@ public class books extends Fragment  implements IBookClickedInterface {
     @Override
     public void onResume() {
         super.onResume();
-        RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.booksList);
         DataAdapter adapter = new DataAdapter(getActivity(), items, this);
-        //добавление notifyDataSetChanged();
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
     }
@@ -60,7 +58,6 @@ public class books extends Fragment  implements IBookClickedInterface {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> itemsBook = dataSnapshot.getChildren();
-
                 for(DataSnapshot book : itemsBook ){
                     Item parsedBook = new Item();
                     String bookId =  myRef.child("books").getKey();
@@ -72,8 +69,12 @@ public class books extends Fragment  implements IBookClickedInterface {
                    if (parsedBook != null) {
                         books.add(parsedBook);
                     }
-                }setInitialData();
-                Log.d("Data", books.toString());
+                }
+                setInitialData();
+                DataAdapter adapter = new DataAdapter(getActivity(), items, books.this);
+                adapter.notifyDataSetChanged();
+                recyclerView.setAdapter(adapter);
+                //Log.d("Data", books.toString());
             }
 
             @Override
