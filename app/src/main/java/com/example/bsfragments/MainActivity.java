@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 break;
 
             case R.id.navigation_accaunt:
-                mAuth = FirebaseAuth.getInstance();
+               /* mAuth = FirebaseAuth.getInstance();
 
                 mAuthListener = new FirebaseAuth.AuthStateListener() {
                     @Override
@@ -47,7 +47,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                         }
 
                     }
-                };
+                };*/
+                fragment = new accaunt();
                 break;
 
         }
