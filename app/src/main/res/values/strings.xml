@@ -13,7 +13,7 @@
     <string name="invalid_password">Пароль должен быть больше 5 знаков</string>
     <string name="login_failed">"Вход провален"</string>
     <string name="search_hint">Поиск</string>
-    <string name="no_records">Ничего не найдено</string>
+    <string name="no_records">Нет данных для отображения</string>
     <string name="add_search">Искать</string>
     <string name="text_search">Введите слово для поиска</string>
 </resources>

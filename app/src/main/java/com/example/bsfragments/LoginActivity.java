@@ -1,5 +1,7 @@
 package com.example.bsfragments;
 
+import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,7 +26,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //String image = getIntent().getExtras().getString("item_book_image");
         mAuth = FirebaseAuth.getInstance();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -67,6 +68,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
                     Toast.makeText(LoginActivity.this, "Aвторизация успешна", Toast.LENGTH_SHORT).show();
+                    //переход во фрагмент аккаунт и передача логина
+                    Bundle mArg = new Bundle();
+                    mArg.putString("user_login", ETemail.getText().toString());
+                    Fragment mFrg = new Fragment();
+                    mFrg.setArguments(mArg);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.navigation_accaunt, mFrg).commit();
+                    //закрытие активити авторизации
                     LoginActivity.this.finish();
                 }else
                     Toast.makeText(LoginActivity.this, "Aвторизация провалена, попробуйте еще раз", Toast.LENGTH_SHORT).show();

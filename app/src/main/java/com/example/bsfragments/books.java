@@ -28,7 +28,7 @@ public class books extends Fragment  implements IBookClickedInterface {
     ArrayList<Item> books = new ArrayList<>();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
-    RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.booksList);
+    RecyclerView recyclerView;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -39,13 +39,14 @@ public class books extends Fragment  implements IBookClickedInterface {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setInitialData();
+        setInitialData();
         return inflater.inflate(R.layout.fragment_books, null);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        recyclerView = (RecyclerView) getView().findViewById(R.id.booksList);
         DataAdapter adapter = new DataAdapter(getActivity(), items, this);
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
@@ -58,6 +59,7 @@ public class books extends Fragment  implements IBookClickedInterface {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> itemsBook = dataSnapshot.getChildren();
+                myRef.getDatabase();
                 for(DataSnapshot book : itemsBook ){
                     Item parsedBook = new Item();
                     String bookId =  myRef.child("books").getKey();
@@ -71,6 +73,7 @@ public class books extends Fragment  implements IBookClickedInterface {
                     }
                 }
                 setInitialData();
+                recyclerView = (RecyclerView) getView().findViewById(R.id.booksList);
                 DataAdapter adapter = new DataAdapter(getActivity(), items, books.this);
                 adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);

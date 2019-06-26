@@ -1,5 +1,6 @@
 package com.example.bsfragments;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -54,7 +55,8 @@ public class AddNewBookActivity extends AppCompatActivity implements View.OnClic
             myRef.child("books").child(idAdd).setValue(book);
 
             Toast.makeText(AddNewBookActivity.this, "Книга добавлена успешна", Toast.LENGTH_SHORT).show();
-            AddNewBookActivity.this.finish();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
         else{
             Toast.makeText(AddNewBookActivity.this, "Поля не заполненны, книга не может быть добавлена", Toast.LENGTH_SHORT).show();
