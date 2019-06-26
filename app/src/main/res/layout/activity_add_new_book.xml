@@ -20,7 +20,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="145dp"
         android:hint="ID"
-        android:textSize="20sp"/>
+        android:textSize="15sp"/>
     <EditText
         android:id="@+id/nameAdd"
         android:layout_width="250dp"
@@ -28,7 +28,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/idAdd"
         android:hint="Название"
-        android:textSize="20sp" />
+        android:textSize="15sp" />
 
     <EditText
         android:id="@+id/authorAdd"
@@ -37,7 +37,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/nameAdd"
         android:hint="Автор"
-        android:textSize="20sp" />
+        android:textSize="15sp" />
 
     <EditText
         android:layout_width="250dp"
@@ -45,7 +45,7 @@
         android:id="@+id/bookGanreAdd"
         android:layout_centerHorizontal="true"
         android:hint="Жанр"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:layout_below="@+id/authorAdd"
         />
     <EditText
@@ -55,7 +55,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/bookGanreAdd"
         android:hint="Цена"
-        android:textSize="20sp"
+        android:textSize="15sp"
         />
     <EditText
         android:id="@+id/imageBookAdd"
@@ -64,7 +64,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/priceAdd"
         android:hint="ССылка изображения"
-        android:textSize="20sp"
+        android:textSize="15sp"
         />
     <Button
         android:id="@+id/add_new_book"
@@ -73,6 +73,8 @@
         android:text="Добавить"
         android:background="@color/colorAccent"
         android:textColor="#FFFFFF"
+        android:padding="10dp"
+        android:textSize="20sp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/imageBookAdd"/>
 </RelativeLayout>
