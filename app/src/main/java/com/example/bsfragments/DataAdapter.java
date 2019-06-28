@@ -14,19 +14,19 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class DataAdapter  extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
-    private LayoutInflater inflater;
     private List<Item> items;
+    Context context;
     private IBookClickedInterface iBookClickedInterface;
 
     DataAdapter(Context context, List<Item> items, IBookClickedInterface iBookClickedInterface) {
         this.items = items;
-        this.inflater = LayoutInflater.from(context);
+        this.context = context;
         this.iBookClickedInterface = iBookClickedInterface;
     }
     @Override
     public DataAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = inflater.inflate(R.layout.book, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.book, parent, false);
         return new ViewHolder(view);
     }
     @Override
@@ -34,9 +34,11 @@ public class DataAdapter  extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
         Item item = items.get(position);
         holder.nameView.setText(item.getName());
         holder.authorView.setText(item.getAuthor());
-        holder.bookGanreView.setText(item.getbookGanre());
+        holder.bookGanreView.setText(item.getBookGanre());
         holder.priceView.setText(item.getPrice());
         Picasso.get().load(item.getImageBook()).into(holder.imageBookView);
+
+        System.out.println(item);
     }
 
     @Override

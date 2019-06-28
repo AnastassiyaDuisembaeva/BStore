@@ -20,31 +20,44 @@ public class Item {
         this.price = price;
         this.imageBook = imageBook;
     }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", bookGanre='" + bookGanre + '\'' +
+                ", price='" + price + '\'' +
+                ", imageBook='" + imageBook + '\'' +
+                '}';
+    }
+
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
+
     public String getAuthor() {
-        return this.author;
+        return author;
     }
 
     public void setAuthor(String author) {
         this.author = author;
     }
 
-    public String getbookGanre() {
-        return this.bookGanre;
+    public String getBookGanre() {
+        return bookGanre;
     }
 
-    public void setbookGanre(String bookGanre) {
+    public void setBookGanre(String bookGanre) {
         this.bookGanre = bookGanre;
     }
 
     public String getPrice() {
-        return this.price;
+        return price;
     }
 
     public void setPrice(String price) {
@@ -52,7 +65,7 @@ public class Item {
     }
 
     public String getImageBook() {
-        return this.imageBook;
+        return imageBook;
     }
 
     public void setImageBook(String imageBook) {
