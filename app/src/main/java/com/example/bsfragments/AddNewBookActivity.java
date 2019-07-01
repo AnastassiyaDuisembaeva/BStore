@@ -49,14 +49,12 @@ public class AddNewBookActivity extends AppCompatActivity implements View.OnClic
     public void writeNewBook(String idAdd, String name, String author, String bookGanre, String price, String imageBook){
         Item book = new Item(name, author, bookGanre, price, imageBook);
         if(book != null){
-            /*Random rand = new Random();
-            int randomNum = rand.nextInt(1000000);
-            String bookId = Integer.toString(randomNum);*/
             myRef.child("books").child(idAdd).setValue(book);
 
             Toast.makeText(AddNewBookActivity.this, "Книга добавлена успешна", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+            this.finish();
         }
         else{
             Toast.makeText(AddNewBookActivity.this, "Поля не заполненны, книга не может быть добавлена", Toast.LENGTH_SHORT).show();

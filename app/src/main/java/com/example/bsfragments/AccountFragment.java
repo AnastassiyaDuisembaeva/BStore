@@ -33,7 +33,7 @@ public class AccountFragment extends Fragment {
     }
 
     public void initializeData(){
-        user_hello.setText("Привет тебе, " +getArguments().getString("user_login") + "!\nНиже показаны твои действия в приложении");
+        user_hello.setText("Привет тебе, " + getArguments().getString("user_login") + "!\nНиже будут размещены покупки пользователя в приложении");
     }
 
     @Override

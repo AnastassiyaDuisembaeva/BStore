@@ -36,9 +36,9 @@ public class DetailsBook extends AppCompatActivity {
         author.setText(getIntent().getExtras().getString("item_book_author"));
         bookGanre.setText(getIntent().getExtras().getString("item_book_ganre"));
         price.setText(getIntent().getExtras().getString("item_book_price"));
-        String myUrl = getIntent().getExtras().getString("item_book_image");
-        Uri myUri = Uri.parse(myUrl);
-        imageBook.setImageURI(myUri);
+        String mypath = getIntent().getExtras().getString("item_book_image");
+        Picasso.get().load(mypath).into(imageBook);
+
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

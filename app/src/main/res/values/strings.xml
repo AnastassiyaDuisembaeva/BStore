@@ -12,8 +12,8 @@
     <string name="invalid_username">Не правильный логин</string>
     <string name="invalid_password">Пароль должен быть больше 5 знаков</string>
     <string name="login_failed">"Вход провален"</string>
-    <string name="search_hint">Поиск</string>
-    <string name="no_records">Нет данных для отображения</string>
-    <string name="add_search">Искать</string>
-    <string name="text_search">Введите слово для поиска</string>
+    <string name="title_contacts">Контакты</string>
+    <string name="text_title">Контакты</string>
+    <string name="text_phone">Телефон: 8 (777) 777 77 77</string>
+    <string name="text_address">Адрес: ул Толе би, д 49</string>
 </resources>

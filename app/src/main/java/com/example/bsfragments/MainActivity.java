@@ -1,6 +1,5 @@
 package com.example.bsfragments;
 
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
@@ -9,13 +8,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener  {
     private FirebaseAuth mAuth;
@@ -26,11 +23,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         Fragment fragment = null;
         switch (item.getItemId()) {
             case R.id.navigation_news:
-                fragment = new news();
+                fragment = new NewsFragment();
                 break;
 
             case R.id.navigation_books:
-                fragment = new books();
+                fragment = new BooksFragment();
                 break;
 
             case R.id.navigation_accaunt:
@@ -64,23 +61,36 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setSupportActionBar(toolbar);
 
 
-        loadFragment(new books());
+        loadFragment(new BooksFragment());
 
         BottomNavigationView navigation = findViewById(R.id.nav_view);
         navigation.setOnNavigationItemSelectedListener(this);
     }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        MenuItem itemAddNewBook = menu.findItem(R.id.action_addNewBook);
+        mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() != null){
+            String myLogin = mAuth.getCurrentUser().getEmail();
+            String adminLogin = "admin@mail.ru";
+            if(myLogin == adminLogin){
+                itemAddNewBook.setVisible(true);
+            }else{
+                itemAddNewBook.setVisible(false);
+            }
+            }
+        else{
+            itemAddNewBook.setVisible(false);
+        }
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_search) {
-            Intent intent = new Intent(this, SearchActivity.class);
+        if(item.getItemId() == R.id.action_contacts) {
+            Intent intent = new Intent(this, ContactsActivity.class);
             startActivity(intent);
         }
         if(item.getItemId() == R.id.action_login) {
@@ -94,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return true;
     }
 
-    private boolean loadFragment(Fragment fragment) {
+    public boolean loadFragment(Fragment fragment) {
 
         FragmentManager fm = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction ft = fm.beginTransaction();

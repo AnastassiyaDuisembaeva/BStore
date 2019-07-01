@@ -10,14 +10,14 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-public class news extends Fragment {
+public class NewsFragment extends Fragment {
     public WebView mWebView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View  v=inflater.inflate(R.layout.fragment_news,  container, false);
         mWebView = (WebView) v.findViewById(R.id.webBrowser);
-        mWebView.loadUrl("https://eksmo.ru/news/");
+        mWebView.loadUrl("https://eksmo.ru/selections/");
 
         // Enable Javascript
         WebSettings webSettings = mWebView.getSettings();

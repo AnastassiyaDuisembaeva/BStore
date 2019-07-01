@@ -18,7 +18,7 @@
         android:layout_height="50dp"
         android:id="@+id/idAdd"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="145dp"
+        android:layout_marginTop="140dp"
         android:hint="ID"
         android:textSize="15sp"/>
     <EditText
@@ -63,7 +63,7 @@
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/priceAdd"
-        android:hint="ССылка изображения"
+        android:hint="Ссылка на изображения"
         android:textSize="15sp"
         />
     <Button
@@ -76,5 +76,6 @@
         android:padding="10dp"
         android:textSize="20sp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/imageBookAdd"/>
 </RelativeLayout>

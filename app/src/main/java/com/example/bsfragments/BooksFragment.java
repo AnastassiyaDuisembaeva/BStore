@@ -25,7 +25,7 @@ import java.util.List;
 
 import static android.support.constraint.Constraints.TAG;
 
-public class books extends Fragment  implements IBookClickedInterface {
+public class BooksFragment extends Fragment  implements IBookClickedInterface {
     View view;
 
     List<Item> items = new ArrayList<>();
@@ -75,6 +75,7 @@ public class books extends Fragment  implements IBookClickedInterface {
                     if(book.hasChildren()){
                         Iterator<DataSnapshot> iter = book.getChildren().iterator();
                         while (iter.hasNext()){
+                            Item item = null;
                             DataSnapshot snap = iter.next();
                             String nodId = snap.getKey();
                             String bookName = (String) snap.child("name").getValue();
@@ -83,7 +84,7 @@ public class books extends Fragment  implements IBookClickedInterface {
                             String bookAuthor = (String) snap.child("author").getValue();
                             String bookImage = (String) snap.child("imageBook").getValue();
 
-                            Item item = new Item (bookName,bookAuthor,bookGenre,bookPrice,bookImage);
+                            item = new Item (bookName,bookAuthor,bookGenre,bookPrice,bookImage);
                             items.add(item);
                         }
 
@@ -102,7 +103,6 @@ public class books extends Fragment  implements IBookClickedInterface {
     @Override
     public void onViewClicked(View view, int position) {
         Intent intent = new Intent(getActivity(), DetailsBook.class);
-        Bundle data = new Bundle();
         intent.putExtra("item_book_image", items.get(position).getImageBook());
         intent.putExtra("item_book_name", items.get(position).getName());
         intent.putExtra("item_book_author", items.get(position).getAuthor());
