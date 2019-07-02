@@ -16,6 +16,8 @@ public class DetailsBook extends AppCompatActivity {
     private TextView author;
     private TextView bookGanre;
     private TextView price;
+    private TextView description;
+
     private ImageView imageBook;
     private Button button;
     @Override
@@ -28,7 +30,9 @@ public class DetailsBook extends AppCompatActivity {
         author = (TextView)findViewById(R.id.author_d);
         bookGanre = (TextView)findViewById(R.id.bookGanre_d);
         price = (TextView)findViewById(R.id.price_d);
+        description = (TextView)findViewById(R.id.description_d);
         imageBook = (ImageView)findViewById(R.id.imageBook_d);
+
         button = (Button)findViewById(R.id.button);
 
 
@@ -36,6 +40,7 @@ public class DetailsBook extends AppCompatActivity {
         author.setText(getIntent().getExtras().getString("item_book_author"));
         bookGanre.setText(getIntent().getExtras().getString("item_book_ganre"));
         price.setText(getIntent().getExtras().getString("item_book_price"));
+        description.setText(getIntent().getExtras().getString("item_book_description"));
         String mypath = getIntent().getExtras().getString("item_book_image");
         Picasso.get().load(mypath).into(imageBook);
 

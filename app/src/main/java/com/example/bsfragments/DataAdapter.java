@@ -36,6 +36,7 @@ public class DataAdapter  extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
         holder.authorView.setText(item.getAuthor());
         holder.bookGanreView.setText(item.getBookGanre());
         holder.priceView.setText(item.getPrice());
+        holder.descriptionView.setText(item.getDescription());
         Picasso.get().load(item.getImageBook()).into(holder.imageBookView);
 
         System.out.println(item);
@@ -48,7 +49,7 @@ public class DataAdapter  extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         final ImageView imageBookView;
-        final TextView nameView, authorView, bookGanreView, priceView;
+        final TextView nameView, authorView, bookGanreView, priceView, descriptionView;
         ViewHolder(View view){
             super(view);
             imageBookView = (ImageView)view.findViewById(R.id.imageBook);
@@ -56,6 +57,7 @@ public class DataAdapter  extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
             authorView = (TextView) view.findViewById(R.id.author);
             bookGanreView = (TextView) view.findViewById(R.id.bookGanre);
             priceView = (TextView) view.findViewById(R.id.price);
+            descriptionView = (TextView) view.findViewById(R.id.description);
 
             imageBookView.setOnClickListener(this);
         }

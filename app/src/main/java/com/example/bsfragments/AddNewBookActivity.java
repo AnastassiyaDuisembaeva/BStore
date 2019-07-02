@@ -23,6 +23,7 @@ public class AddNewBookActivity extends AppCompatActivity implements View.OnClic
     private EditText author;
     private EditText bookGanre;
     private EditText price;
+    private EditText description;
     private EditText imageBook;
 
     @Override
@@ -35,6 +36,7 @@ public class AddNewBookActivity extends AppCompatActivity implements View.OnClic
         author = (EditText)findViewById(R.id.authorAdd);
         bookGanre = (EditText)findViewById(R.id.bookGanreAdd);
         price = (EditText)findViewById(R.id.priceAdd);
+        description = (EditText)findViewById(R.id.descriptionAdd);
         imageBook = (EditText)findViewById(R.id.imageBookAdd);
 
         findViewById(R.id.add_new_book).setOnClickListener((View.OnClickListener) this);
@@ -43,11 +45,12 @@ public class AddNewBookActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View view) {
         if(view.getId() == R.id.add_new_book)
         {
-            writeNewBook(idAdd.getText().toString(), name.getText().toString(), author.getText().toString(), bookGanre.getText().toString(), price.getText().toString(), imageBook.getText().toString());
+            writeNewBook(idAdd.getText().toString(), name.getText().toString(), author.getText().toString(),
+                    bookGanre.getText().toString(), price.getText().toString(), description.getText().toString(), imageBook.getText().toString());
         }
     }
-    public void writeNewBook(String idAdd, String name, String author, String bookGanre, String price, String imageBook){
-        Item book = new Item(name, author, bookGanre, price, imageBook);
+    public void writeNewBook(String idAdd, String name, String author, String bookGanre, String price, String description, String imageBook){
+        Item book = new Item(name, author, bookGanre, price, description, imageBook);
         if(book != null){
             myRef.child("books").child(idAdd).setValue(book);
 

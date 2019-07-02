@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:padding="8dp"
+    android:orientation="vertical"
     tools:context=".DetailsBook">
 
     <android.support.v7.widget.CardView
@@ -14,9 +15,14 @@
         android:id="@+id/cv_d"
         >
         <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        >
+        <RelativeLayout
+            android:id="@+id/rl_text_book"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
             >
             <ImageView
                 android:layout_width="170dp"
@@ -36,7 +42,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="16dp"
                 android:layout_toRightOf="@+id/imageBook_d"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textColor="@android:color/black"
                 tools:text="И грянул гром" />
             <TextView
@@ -44,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/author_d"
                 tools:text="Рэй Бредбери"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:layout_marginTop="8dp"
                 android:layout_toRightOf="@+id/imageBook_d"
                 android:layout_below="@+id/name_d"
@@ -55,6 +61,7 @@
                 android:layout_height="wrap_content"
                 tools:text="фантастика"
                 android:layout_marginTop="8dp"
+                android:textSize="12sp"
                 android:layout_toRightOf="@+id/imageBook_d"
                 android:layout_below="@+id/author_d"
                 />
@@ -63,6 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="1500"
+                android:textSize="12sp"
                 android:layout_marginTop="8dp"
                 android:layout_toRightOf="@+id/imageBook_d"
                 android:layout_below="@+id/bookGanre_d"
@@ -72,6 +80,7 @@
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="15sp"
                 android:layout_toRightOf="@+id/imageBook_d"
                 android:layout_below="@+id/price_d"
                 android:layout_marginTop="24dp"
@@ -79,6 +88,16 @@
                 android:background="@color/colorAccent"
                 android:textColor="#FFFFFF"
                 android:text="Button" />
+        </RelativeLayout>
+            <TextView
+                android:id="@+id/description_d"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="lorem ipsum ..."
+                android:layout_marginTop="8dp"
+                android:textSize="12sp"
+                android:layout_below="@+id/rl_text_book"
+                />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

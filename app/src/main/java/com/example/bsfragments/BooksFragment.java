@@ -82,9 +82,10 @@ public class BooksFragment extends Fragment  implements IBookClickedInterface {
                             String bookGenre = (String) snap.child("bookGanre").getValue();
                             String bookPrice = (String) snap.child("price").getValue();
                             String bookAuthor = (String) snap.child("author").getValue();
+                            String bookDescription = (String) snap.child("description").getValue();
                             String bookImage = (String) snap.child("imageBook").getValue();
 
-                            item = new Item (bookName,bookAuthor,bookGenre,bookPrice,bookImage);
+                            item = new Item (bookName,bookAuthor,bookGenre,bookPrice,bookDescription,bookImage);
                             items.add(item);
                         }
 
@@ -108,6 +109,7 @@ public class BooksFragment extends Fragment  implements IBookClickedInterface {
         intent.putExtra("item_book_author", items.get(position).getAuthor());
         intent.putExtra("item_book_price", items.get(position).getPrice());
         intent.putExtra("item_book_ganre", items.get(position).getBookGanre());
+        intent.putExtra("item_book_description", items.get(position).getDescription());
 
         getActivity().startActivity(intent);
     }
