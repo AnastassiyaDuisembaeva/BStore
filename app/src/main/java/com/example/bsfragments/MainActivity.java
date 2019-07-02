@@ -51,6 +51,18 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return loadFragment(fragment);
     }
 
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        invalidateOptionsMenu();
+//    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        invalidateOptionsMenu();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,24 +79,30 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         navigation.setOnNavigationItemSelectedListener(this);
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem itemAddNewBook = menu.findItem(R.id.action_addNewBook);
         mAuth = FirebaseAuth.getInstance();
         if(mAuth.getCurrentUser() != null){
-            String myLogin = mAuth.getCurrentUser().getEmail();
             String adminLogin = "admin@mail.ru";
-            if(myLogin == adminLogin){
+            String userLogin = mAuth.getCurrentUser().getEmail();
+            if(userLogin == adminLogin){
                 itemAddNewBook.setVisible(true);
             }else{
                 itemAddNewBook.setVisible(false);
             }
-            }
+        }
         else{
             itemAddNewBook.setVisible(false);
         }
-        return true;
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -105,7 +123,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
     public boolean loadFragment(Fragment fragment) {
-
         FragmentManager fm = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.fragment_container, fragment);

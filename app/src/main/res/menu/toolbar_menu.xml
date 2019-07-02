@@ -17,6 +17,5 @@
         android:icon="@drawable/ic_add_new_book"
         android:title="@string/title_books"
         app:showAsAction="always"
-        android:visible="true"
         />
 </menu>

@@ -100,7 +100,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Log.d(LoginActivity.class.getSimpleName(), "CALLED!");
         if (user != null) {
             Toast.makeText(LoginActivity.this, "Aвторизация успешна", Toast.LENGTH_SHORT).show();
-
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
