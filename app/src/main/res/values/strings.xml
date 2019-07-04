@@ -4,6 +4,7 @@
     <string name="title_books">Книги</string>
     <string name="title_accaunt">Кабинет</string>
     <string name="title_activity_login">Вход</string>
+    <string name="title_activity_logout">Выход</string>
     <string name="prompt_email">Почта</string>
     <string name="prompt_password">Пароль</string>
     <string name="action_sign_in">Войдите или зарегестрируйтесь</string>

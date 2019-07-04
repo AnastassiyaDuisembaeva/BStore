@@ -51,17 +51,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return loadFragment(fragment);
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        invalidateOptionsMenu();
-//    }
-
     @Override
-    protected void onRestart() {
-        super.onRestart();
+    protected void onResume() {
+        super.onResume();
         invalidateOptionsMenu();
     }
+
+//    @Override
+//    protected void onRestart() {
+//        super.onRestart();
+//        invalidateOptionsMenu();
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +89,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem itemAddNewBook = menu.findItem(R.id.action_addNewBook);
+        MenuItem itemLogIn = menu.findItem(R.id.action_login);
+        MenuItem itemLogOut = menu.findItem(R.id.action_logout);
+
         mAuth = FirebaseAuth.getInstance();
         if(mAuth.getCurrentUser() != null){
+            itemLogIn.setVisible(false);
+            itemLogOut.setVisible(true);
             String adminLogin = "admin@mail.ru";
             String userLogin = mAuth.getCurrentUser().getEmail();
             if(userLogin == adminLogin){
@@ -100,6 +105,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             }
         }
         else{
+            itemLogIn.setVisible(true);
+            itemLogOut.setVisible(false);
             itemAddNewBook.setVisible(false);
         }
         return super.onPrepareOptionsMenu(menu);
@@ -107,17 +114,24 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_contacts) {
-            Intent intent = new Intent(this, ContactsActivity.class);
-            startActivity(intent);
-        }
-        if(item.getItemId() == R.id.action_login) {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-        }
-        if(item.getItemId() == R.id.action_addNewBook) {
-            Intent intent = new Intent(this, AddNewBookActivity.class);
-            startActivity(intent);
+        Intent intent;
+        switch (item.getItemId()) {
+            case R.id.action_contacts:
+                intent = new Intent(this, ContactsActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.action_login:
+                intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.action_logout:
+                intent = new Intent(this, LogoutActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.action_addNewBook:
+                intent = new Intent(this, AddNewBookActivity.class);
+                startActivity(intent);
+                break;
         }
         return true;
     }
