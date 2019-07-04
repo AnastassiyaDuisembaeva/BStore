@@ -1,6 +1,5 @@
 package com.example.bsfragments;
 
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
@@ -9,13 +8,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener  {
     private FirebaseAuth mAuth;
@@ -26,11 +23,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         Fragment fragment = null;
         switch (item.getItemId()) {
             case R.id.navigation_news:
-                fragment = new news();
+                fragment = new NewsFragment();
                 break;
 
             case R.id.navigation_books:
-                fragment = new books();
+                fragment = new BooksFragment();
                 break;
 
             case R.id.navigation_accaunt:
@@ -55,6 +52,18 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        invalidateOptionsMenu();
+    }
+
+//    @Override
+//    protected void onRestart() {
+//        super.onRestart();
+//        invalidateOptionsMenu();
+//    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -64,12 +73,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setSupportActionBar(toolbar);
 
 
-        loadFragment(new books());
+        loadFragment(new BooksFragment());
 
         BottomNavigationView navigation = findViewById(R.id.nav_view);
         navigation.setOnNavigationItemSelectedListener(this);
     }
-
 
 
     @Override
@@ -77,25 +85,58 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem itemAddNewBook = menu.findItem(R.id.action_addNewBook);
+        MenuItem itemLogIn = menu.findItem(R.id.action_login);
+        MenuItem itemLogOut = menu.findItem(R.id.action_logout);
+
+        mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() != null){
+            itemLogIn.setVisible(false);
+            itemLogOut.setVisible(true);
+            String adminLogin = "admin@mail.ru";
+            String userLogin = mAuth.getCurrentUser().getEmail();
+            if(userLogin == adminLogin){
+                itemAddNewBook.setVisible(true);
+            }else{
+                itemAddNewBook.setVisible(false);
+            }
+        }
+        else{
+            itemLogIn.setVisible(true);
+            itemLogOut.setVisible(false);
+            itemAddNewBook.setVisible(false);
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_search) {
-            Intent intent = new Intent(this, SearchActivity.class);
-            startActivity(intent);
-        }
-        if(item.getItemId() == R.id.action_login) {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-        }
-        if(item.getItemId() == R.id.action_addNewBook) {
-            Intent intent = new Intent(this, AddNewBookActivity.class);
-            startActivity(intent);
+        Intent intent;
+        switch (item.getItemId()) {
+            case R.id.action_contacts:
+                intent = new Intent(this, ContactsActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.action_login:
+                intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.action_logout:
+                intent = new Intent(this, LogoutActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.action_addNewBook:
+                intent = new Intent(this, AddNewBookActivity.class);
+                startActivity(intent);
+                break;
         }
         return true;
     }
 
-    private boolean loadFragment(Fragment fragment) {
-
+    public boolean loadFragment(Fragment fragment) {
         FragmentManager fm = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.fragment_container, fragment);

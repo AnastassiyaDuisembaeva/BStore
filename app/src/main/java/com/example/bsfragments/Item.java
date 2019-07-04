@@ -8,16 +8,18 @@ public class Item {
     private String author;
     private String bookGanre;
     private String price;
+    private String description;
 
     private String imageBook;
     //  private int imageBook;
 
-    public Item(String name, String author, String bookGanre, String price, String imageBook){
+    public Item(String name, String author, String bookGanre, String price, String description, String imageBook){
 
         this.name = name;
         this.author = author;
         this.bookGanre = bookGanre;
         this.price = price;
+        this.description = description;
         this.imageBook = imageBook;
     }
 
@@ -28,6 +30,7 @@ public class Item {
                 ", author='" + author + '\'' +
                 ", bookGanre='" + bookGanre + '\'' +
                 ", price='" + price + '\'' +
+                ", description='" + description + '\'' +
                 ", imageBook='" + imageBook + '\'' +
                 '}';
     }
@@ -62,6 +65,13 @@ public class Item {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getImageBook() {

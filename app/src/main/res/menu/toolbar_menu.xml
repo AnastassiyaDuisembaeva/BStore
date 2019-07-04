@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
     <item
-        android:id="@+id/action_search"
-        android:icon="@drawable/ic_search"
-        android:title="@string/search_hint"
+        android:id="@+id/action_contacts"
+        android:icon="@drawable/ic_contacts"
+        android:title="@string/title_contacts"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_login"
@@ -13,8 +13,14 @@
         android:title="@string/action_sign_in_short"
         app:showAsAction="always" />
     <item
+        android:id="@+id/action_logout"
+        android:icon="@drawable/ic_logout"
+        android:title="@string/title_activity_logout"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/action_addNewBook"
         android:icon="@drawable/ic_add_new_book"
-        android:title="@string/action_sign_in_short"
-        app:showAsAction="always" />
+        android:title="@string/title_books"
+        app:showAsAction="always"
+        />
 </menu>
