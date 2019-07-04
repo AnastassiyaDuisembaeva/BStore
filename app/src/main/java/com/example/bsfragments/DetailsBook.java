@@ -21,6 +21,7 @@ public class DetailsBook extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_details_book);
 
         Bundle arguments = getIntent().getExtras();
         name = (TextView)findViewById(R.id.name_d);
@@ -45,7 +46,5 @@ public class DetailsBook extends AppCompatActivity {
                 DetailsBook.this.finish();
             }
         });
-
-        setContentView(R.layout.activity_details_book);
     }
 }
