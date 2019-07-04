@@ -6,11 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".BooksFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/booksList"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefresh_fragment_books_refresher"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/book" />
+        android:animateLayoutChanges="true"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/booksList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/book" />
 
+    </android.support.v4.widget.SwipeRefreshLayout>
 </android.support.constraint.ConstraintLayout>

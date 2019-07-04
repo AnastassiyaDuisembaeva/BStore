@@ -69,8 +69,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btn_registration:
 
-                registration(ETemail.getText().toString(),
-                        ETpassword.getText().toString());
+                if(ETemail.getText().toString().length() > 0 &&
+                        ETpassword.getText().toString().length() > 0){
+                    registration(ETemail.getText().toString(),
+                            ETpassword.getText().toString());
+                }else{
+                    Toast.makeText(this, "Пожалуйста укажите все необходимые данные", Toast.LENGTH_LONG).show();
+                }
 
                 break;
         }

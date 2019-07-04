@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             itemLogOut.setVisible(true);
             String adminLogin = "admin@mail.ru";
             String userLogin = mAuth.getCurrentUser().getEmail();
-            if(userLogin == adminLogin){
+            if(userLogin != null && userLogin.equals(adminLogin)){
                 itemAddNewBook.setVisible(true);
             }else{
                 itemAddNewBook.setVisible(false);

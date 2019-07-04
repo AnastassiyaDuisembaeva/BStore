@@ -3,9 +3,11 @@ package com.example.bsfragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +27,7 @@ import java.util.List;
 
 import static android.support.constraint.Constraints.TAG;
 
-public class BooksFragment extends Fragment  implements IBookClickedInterface {
+public class BooksFragment extends Fragment  implements IBookClickedInterface, SwipeRefreshLayout.OnRefreshListener {
     View view;
 
     List<Item> items = new ArrayList<>();
@@ -33,6 +35,9 @@ public class BooksFragment extends Fragment  implements IBookClickedInterface {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
     RecyclerView recyclerView;
+    DataAdapter adapter;
+
+    SwipeRefreshLayout mSwipeRefreshLayoutUpdater;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -47,15 +52,35 @@ public class BooksFragment extends Fragment  implements IBookClickedInterface {
 
         view = inflater.inflate(R.layout.fragment_books, container, false);
 
+        initializeSwipeRefresher();
+        initializeListener();
+        initializeRecyclerView();
+        initializeAdapter();
+
         return view;
     }
 
+    public void initializeRecyclerView(){
+        recyclerView = (RecyclerView) view.findViewById(R.id.booksList);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        updateList();
+    }
 
     public void initializeAdapter(){
-        recyclerView = (RecyclerView) view.findViewById(R.id.booksList);
-        DataAdapter adapter = new DataAdapter(getActivity(), items, this);
-        adapter.notifyDataSetChanged();
+        adapter = new DataAdapter(getActivity(), items, this);
         recyclerView.setAdapter(adapter);
+    }
+
+    public void initializeSwipeRefresher(){
+        mSwipeRefreshLayoutUpdater = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh_fragment_books_refresher);
+    }
+
+    public void initializeListener(){
+        mSwipeRefreshLayoutUpdater.setOnRefreshListener(this);
     }
 
     @Override
@@ -66,6 +91,41 @@ public class BooksFragment extends Fragment  implements IBookClickedInterface {
     @Override
     public void onStart() {
         super.onStart();
+    }
+    @Override
+    public void onViewClicked(View view, int position) {
+        Intent intent = new Intent(getActivity(), DetailsBook.class);
+        intent.putExtra("item_book_image", items.get(position).getImageBook());
+        intent.putExtra("item_book_name", items.get(position).getName());
+        intent.putExtra("item_book_author", items.get(position).getAuthor());
+        intent.putExtra("item_book_price", items.get(position).getPrice());
+        intent.putExtra("item_book_ganre", items.get(position).getBookGanre());
+        intent.putExtra("item_book_description", items.get(position).getDescription());
+
+        getActivity().startActivity(intent);
+    }
+
+    public void updateList(){
+        hideRecyclerView();
+        clearBookList();
+        getBooksList();
+    }
+
+    public void hideRecyclerView(){
+        recyclerView.setVisibility(View.GONE);
+    }
+
+    public void displayRecyclerView(){
+        recyclerView.setVisibility(View.VISIBLE);
+    }
+
+    public void clearBookList(){
+        items.clear();
+        recyclerView.removeAllViews();
+        adapter.notifyDataSetChanged();
+    }
+
+    public void getBooksList(){
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -91,26 +151,28 @@ public class BooksFragment extends Fragment  implements IBookClickedInterface {
 
                     }
                 }
-             initializeAdapter();
+                mSwipeRefreshLayoutUpdater.setRefreshing(false);
+                initializeAdapter();
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
+                mSwipeRefreshLayoutUpdater.setRefreshing(false);
+                initializeAdapter();
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                displayRecyclerView();
+            }
+        }, 500);
     }
-    @Override
-    public void onViewClicked(View view, int position) {
-        Intent intent = new Intent(getActivity(), DetailsBook.class);
-        intent.putExtra("item_book_image", items.get(position).getImageBook());
-        intent.putExtra("item_book_name", items.get(position).getName());
-        intent.putExtra("item_book_author", items.get(position).getAuthor());
-        intent.putExtra("item_book_price", items.get(position).getPrice());
-        intent.putExtra("item_book_ganre", items.get(position).getBookGanre());
-        intent.putExtra("item_book_description", items.get(position).getDescription());
 
-        getActivity().startActivity(intent);
+    @Override
+    public void onRefresh() {
+       updateList();
     }
 }
